@@ -11,7 +11,7 @@ import os
 n = 120
 data = None
 break_point = 85
-interval = 0.005
+interval = 0.05
 load_dotenv()
 
 
@@ -73,7 +73,6 @@ def data_from_sensor():
     )
 
     temperature_chart = temperature_chart.properties(
-        width=700,
         height=400,
         title='Temperature Data from Sensor'
     ).configure_axis(
@@ -81,7 +80,7 @@ def data_from_sensor():
     )
 
     # Render the chart using Streamlit
-    st.altair_chart(temperature_chart)
+    st.altair_chart(temperature_chart, use_container_width=True)
 
     humidity = pd.DataFrame(
         {"Time-Step": [i for i in range(0, n)], "Humidity": [x[1] for x in data[0]]})
@@ -92,7 +91,6 @@ def data_from_sensor():
     )
 
     humidity_chart = humidity_chart.properties(
-        width=700,
         height=400,
         title='Humidity Data from Sensor'
     ).configure_axis(
@@ -100,7 +98,7 @@ def data_from_sensor():
     )
 
     # Render the chart using Streamlit
-    st.altair_chart(humidity_chart)
+    st.altair_chart(humidity_chart, use_container_width=True)
     st.write("Visualisation of Combined Data")
     st.line_chart(dataframe)
 
@@ -121,7 +119,6 @@ def data_from_prediction(to_predict):
     )
 
     temperature_chart = temperature_chart.properties(
-        width=700,
         height=400,
         title='Predicted Temperature Data'
     ).configure_axis(
@@ -129,7 +126,7 @@ def data_from_prediction(to_predict):
     )
 
     # Render the chart using Streamlit
-    st.altair_chart(temperature_chart)
+    st.altair_chart(temperature_chart, use_container_width=True)
 
     humidity = pd.DataFrame(
         {"Time-Step": [i for i in range(n, n+to_predict)], "Humidity": [x[1] for x in output]})
@@ -140,7 +137,6 @@ def data_from_prediction(to_predict):
     )
 
     humidity_chart = humidity_chart.properties(
-        width=700,
         height=400,
         title='Predicted Humidity Data'
     ).configure_axis(
@@ -148,7 +144,7 @@ def data_from_prediction(to_predict):
     )
 
     # Render the chart using Streamlit
-    st.altair_chart(humidity_chart)
+    st.altair_chart(humidity_chart, use_container_width=True)
     st.text("Visualisation of Combined Data")
     st.line_chart(dataframe)
 
